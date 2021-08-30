@@ -13,11 +13,11 @@ function Header(props) {
                         <Link to="/sign-in" className="header__button" onClick={props.signOut}>Выйти</Link>
                     </Route>
 
-                    <Route puth="/sign-in">
+                    <Route path="/sign-in">
                         <Link to="sign-up" className="header__button">Регистрация</Link>
                     </Route>
 
-                    <Route puth="/sign-up">
+                    <Route path="/sign-up">
                         <Link to="sign-in" className="header__button">Войти</Link>
                     </Route>
                 </Switch>

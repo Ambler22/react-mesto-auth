@@ -15,7 +15,7 @@ import Login from './Login';
 import Register from "./Register";
 import ProtectedRoute from './ProtectedRoute';
 import InfoTooltip from './InfoTooltip';
-import {register, authorize, getContent} from "./auth"
+import { register, authorize, getContent } from "./auth"
 import success from '../images/success.svg';
 import fail from '../images/fail.svg'
 
@@ -64,6 +64,7 @@ function App() {
                     history.push('/');
                 })
                 .catch((err) => {
+                    signOut();
                     console.log(err);
                 })
         }
@@ -90,11 +91,16 @@ function App() {
 
     function authorization(email, password) {
         authorize(email, password)
-        if (email !== valueEmail) {
-            setValueEmail(email);
-        }
-        setIsLoggedIn(true);
-        history.push('/');
+            .then(() => {
+                if (email !== valueEmail) {
+                    setValueEmail(email);
+                }
+                setIsLoggedIn(true);
+                history.push('/');
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     function signOut() {
@@ -200,7 +206,6 @@ function App() {
             />
 
             <Switch>
-
                 <Route path="/sign-in">
                     <Login authorization={authorization} />
                 </Route>
@@ -209,7 +214,7 @@ function App() {
                     <Register registration={registration} />
                 </Route>
 
-                <Route puth="/"> {
+                <Route path="/"> {
                     isLoggedIn ? < Redirect to="/" /> : < Redirect to="sign-in" />
                 } </Route>
 
