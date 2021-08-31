@@ -94,7 +94,6 @@ function App() {
             .then((data) => {
                 if (data.token) {
                     localStorage.setItem('jwt', data.token);
-                    return data.token;
                 }
                 setValueEmail(email);
                 setIsLoggedIn(true);
